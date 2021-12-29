@@ -1,0 +1,29 @@
+.586
+.model flat, stdcall
+extern ExitProcess@4:near
+includelib c:\masm32\lib\user32.lib
+includelib C:\masm32\lib\kernel32.lib
+
+data segment
+
+n equ 5
+a db 1,2,3,4,5
+
+data ends
+text segment
+
+start:
+
+mov cx,n
+mov si,0
+L:mov al, a[si]
+cmp al,0
+jl n
+mov a[si],0
+n:neg a[si]
+loop l
+
+push 0
+call ExitProcess@4
+text ends
+end start
